@@ -1,4 +1,4 @@
-@(boards: List[Board], boardForm: Form[(String, String, String, String, String, String)])
+@(boards: List[Board], boardForm: Form[controllers.Application.BoardData])
 
 @import helper._
 
@@ -22,7 +22,12 @@
 
       @form(routes.Application.newBoard) {
 
-      @inputText(boardForm("name", "height", "width", "volume", "thickness", "image"))
+      @inputText(boardForm("name"))
+      @inputText(boardForm("height"))
+      @inputText(boardForm("width"))
+      @inputText(boardForm("volume"))
+      @inputText(boardForm("thickness"))
+      @inputText(boardForm("image"))
 
       <input type="submit" value="Create">
      }

@@ -8,15 +8,17 @@ import models.Board
 
 object Application extends Controller {
 
+  case class BoardData(name: String, height: String, width: String, volume: String, thickness: String, image: String)
+
   val boardForm = Form(
-    tuple(
+    mapping(
       "name" -> nonEmptyText,
       "height" -> nonEmptyText,
       "width" -> nonEmptyText,
       "volume" -> nonEmptyText,
       "thickness" -> nonEmptyText,
       "image" -> nonEmptyText
-    )
+    )(BoardData.apply)(BoardData.unapply)
   )
 
   def index = Action {
@@ -30,8 +32,9 @@ object Application extends Controller {
   def newBoard = Action { implicit request =>
     boardForm.bindFromRequest.fold(
       errors => BadRequest(views.html.index(Board.all(), errors)),
-      name => {
-        Board.create(name, height, width, volume, thickness, image)
+      boardForm => {
+        Board.create(boardForm.name, boardForm.height, boardForm.width,
+          boardForm.volume, boardForm.thickness, boardForm.image)
         Redirect(routes.Application.boards)
       }
     )
