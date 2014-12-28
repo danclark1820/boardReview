@@ -1,0 +1,30 @@
+@(boards: List[Board], boardForm: Form[(String, String, String, String, String, String)])
+
+@import helper._
+
+@main("Boards") {
+
+  <h1>  @boards.size board(s) </h1>
+
+  <ul>
+      @boards.map { board =>
+      <li>
+          @board.name
+
+          @form(routes.Application.delete(board.id)) {
+          <input type="submit" value="Delete">
+          }	
+      </li>
+     }
+  </ul>
+
+  <h2>Add a new Board</h2>
+
+      @form(routes.Application.newBoard) {
+
+      @inputText(boardForm("name", "height", "width", "volume", "thickness", "image"))
+
+      <input type="submit" value="Create">
+     }
+
+}
