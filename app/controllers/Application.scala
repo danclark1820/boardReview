@@ -40,6 +40,8 @@ object Application extends Controller {
     )
   }
 
-  def delete(id: Long) = TODO
-
+  def deleteBoard(id: Long) = Action {
+    Board.delete(id)
+    Redirect(routes.Application.boards)
+  }
 }
