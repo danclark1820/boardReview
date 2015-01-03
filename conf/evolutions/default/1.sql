@@ -10,11 +10,10 @@ CREATE TABLE boards (
     Width varchar(255),
     Volume varchar(255),
     Thickness varchar(255),
-    Image varchar(255),
+    Image varchar(255)
 );
 
 # --- !Downs
-DROP TABLE boards;
 DROP SEQUENCE board_id_seq;
-
+DROP TABLE boards;
     
